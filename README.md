@@ -157,6 +157,49 @@ console.log(idGenerator.next())
 ## IV. Advanced features
 
 ```
+function *adding(){
+  const result = 1 + 1
+  return 20 + (yield result)
+}
+
+const sum = adding()
+
+console.log(sum.next())
+console.log(sum.next())
+```
+What this expected? Try ...
+```
+function *adding(){
+  const result = 1 + 1
+  return 20 + (yield result)
+}
+
+const sum = adding()
+
+console.log(sum.next())
+console.log(sum.next(10))
+```
+Another example
+
+```
+function* crossBridge() {
+  const reply = yield 'What is your favorite color?';
+  console.log(reply);
+  if (reply !== 'yellow') return 'Wrong!'
+  return 'You may pass.';
+}
+
+{
+  const iter = crossBridge();
+  const q = iter.next().value; // Iterator yields question
+  console.log(q);
+  const a = iter.next('blue').value; // Pass reply back into generator
+  console.log(a);
+}
+
+```
+
+```
 function *generateId() {
   let id = 1
 
