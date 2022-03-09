@@ -76,7 +76,7 @@ const generatorObject = simpleGenerator()
 console.log(generatorObject)
 ```
 
-We can see the first time we run our generator, an object is returned. Look at the `proto` and note what methods are available on this object. Which one will help us `iterate`?
+We can see the first time we run our generator, an object is returned. Look at the `prototype` and note what methods are available on this object. Which one will help us `iterate`?
 
 ```
 const nextObject = generatorObject.next()
