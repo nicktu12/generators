@@ -47,7 +47,9 @@ function chaseCat() {
 thingsICallMyCat()
 ```
 
-How was this output different from before? We expect to see the strings printed in order, but the `chaseCat()` string prints last. This is due to JS event loop and call stack. JS executes each function in the order that arrives in the `event queue`, but `setTimeout` is a `web api` that waits for a specified time _AND_ for the `event queue` to be clear before executing the callback within.
+How was this output different from before? We expect to see the strings printed in order, but the `chaseCat()` string prints last. This is due to JS event loop and call stack. JS executes each function in the order that arrives in the `message queue`, but `setTimeout` is a `web api` that waits for a specified time _AND_ for the `message queue` to be clear before executing the callback within.
+
+A great video on the event loop: https://youtu.be/8aGhZQkoFbQ
 
 This is where generators come into play. Generators are complicated, misunderstood and incredibly useful advanced iterators introduced in ES6.
 
@@ -59,9 +61,9 @@ Generators are functions `()` that return objects `{}` that are easily iterated 
 
 What is an iterable? What else is iterable in JS?
 
-Although iterable objects aren't arrays, they are still collections of key value pairs that can be iterated over with a `for...of` loop. 
+Although iterable objects aren't arrays, they are still collections of key value pairs that can be iterated over with a `for...in` loop. 
 
-Whats the syntax of a `for...of` loop?
+Whats the syntax of a `for...in` loop?
 
 ```
 function* simpleGenerator() {
@@ -112,7 +114,7 @@ We can also have a generator within a generator. Note the syntax here.
 function* simpleGenerator() {
   yield 1
   yield 2
-  yield* inception()
+  yield* inceptionGenerator()
   yield 6
 }
 
@@ -124,7 +126,7 @@ function* inceptionGenerator() {
 
 const generatorObject = simpleGenerator()
 
-for (let num of simpleGenerator){
+for (let num in simpleGenerator){
   console.log(num)
 }
 ```
